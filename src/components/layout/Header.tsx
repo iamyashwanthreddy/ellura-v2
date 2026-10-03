@@ -4,7 +4,7 @@ import { useCart } from '../../commerce/cart';
 import { PACK_TAG, PRODUCTS, productUrl, src, toneOf } from '../../commerce/catalog';
 import { formatINR, unitPrice } from '../../commerce/pricing';
 import { ANNOUNCEMENTS } from '../../content/brand';
-import { HEADER_LEFT, HEADER_RIGHT } from '../../content/nav';
+import { HEADER_NAV } from '../../content/nav';
 import { gsap, ScrollTrigger, reducedMotion } from '../../lib/gsap';
 import { inert } from '../../lib/a11y';
 import Icon from '../ui/Icon';
@@ -179,34 +179,32 @@ export default function Header() {
             <Icon name="menu" />
           </button>
 
-          <nav className="header__nav header__nav--left" aria-label="Main">
-            <ul role="list">{renderLinks(HEADER_LEFT)}</ul>
-          </nav>
-
           <Link to="/ellura" className="header__logo" aria-label="ellura home">
-            <Logo tone="plum" height={30} />
+            <Logo tone="plum" height={32} />
           </Link>
 
-          <div className="header__right">
-            <nav className="header__nav header__nav--right" aria-label="More">
-              <ul role="list">{renderLinks(HEADER_RIGHT)}</ul>
-            </nav>
-            <div className="header__actions">
-              <button className="icon-btn" onClick={() => setSearchOpen(true)} aria-label="Search">
-                <Icon name="search" />
-              </button>
-              <Link to="/ellura/account" className="icon-btn header__account" aria-label="My account">
-                <Icon name="user" />
-              </Link>
-              <button className="icon-btn header__cart" onClick={() => setCartOpen(true)} aria-label={`Open cart, ${totals.itemCount} item${totals.itemCount === 1 ? '' : 's'}`}>
-                <Icon name="bag" />
-                {totals.itemCount > 0 && (
-                  <span ref={countRef} className="header__count" aria-hidden="true">
-                    {totals.itemCount}
-                  </span>
-                )}
-              </button>
-            </div>
+          <nav className="header__nav" aria-label="Main">
+            <ul role="list">{renderLinks(HEADER_NAV)}</ul>
+          </nav>
+
+          <div className="header__actions">
+            <button className="icon-btn" onClick={() => setSearchOpen(true)} aria-label="Search">
+              <Icon name="search" />
+            </button>
+            <Link to="/ellura/account" className="icon-btn header__account" aria-label="My account">
+              <Icon name="user" />
+            </Link>
+            <button className="icon-btn header__cart" onClick={() => setCartOpen(true)} aria-label={`Open cart, ${totals.itemCount} item${totals.itemCount === 1 ? '' : 's'}`}>
+              <Icon name="bag" />
+              {totals.itemCount > 0 && (
+                <span ref={countRef} className="header__count" aria-hidden="true">
+                  {totals.itemCount}
+                </span>
+              )}
+            </button>
+            <Link to="/ellura/shop" className="btn btn--sm header__cta">
+              Shop now
+            </Link>
           </div>
         </div>
         <ShopPanel open={megaOpen} onClose={() => setMegaOpen(false)} />

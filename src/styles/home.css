@@ -453,7 +453,6 @@
   color: var(--plum-800);
 }
 .usroute {
-  position: relative;
   margin-top: 8px;
 }
 .usroute__svg {
@@ -461,45 +460,54 @@
   height: auto;
   overflow: visible;
 }
-.usroute__grid {
+.usroute__land {
+  fill: rgba(90, 46, 88, 0.16);
+}
+.usroute__country {
+  fill: var(--plum);
+}
+.usroute__base {
   fill: none;
-  stroke: rgba(45, 20, 48, 0.16);
-  stroke-dasharray: 3 8;
+  stroke: rgba(90, 46, 88, 0.25);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
 }
 .usroute__path {
   fill: none;
-  stroke: var(--plum);
-  stroke-width: 3;
+  stroke: var(--plum-900);
+  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 2 9;
 }
 .usroute__dot {
-  fill: var(--plum);
+  fill: var(--plum-900);
+  stroke: #fff;
+  stroke-width: 2;
 }
-.usroute__dot--in {
-  fill: var(--berry);
+.usroute__marker circle {
+  fill: var(--plum-900);
+  stroke: #fff;
+  stroke-width: 2;
 }
-.usroute__label {
-  position: absolute;
-  font-size: 0.78rem;
+.usroute__marker .usroute__halo {
+  fill: rgba(255, 255, 255, 0.7);
+  stroke: none;
+}
+.usroute__pin {
+  font-family: var(--font-sans);
+  font-size: 15px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  line-height: 1.3;
+  fill: var(--plum-900);
+  paint-order: stroke;
+  stroke: var(--lilac);
+  stroke-width: 5px;
+  stroke-linejoin: round;
 }
-.usroute__label span {
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-.usroute__label--us {
-  left: 0;
-  top: 80%;
-}
-.usroute__label--in {
-  right: 0;
-  top: 62%;
-  text-align: right;
+@media (max-width: 640px) {
+  .usroute__pin {
+    font-size: 24px;
+  }
 }
 .usin__stats {
   display: grid;
@@ -709,10 +717,10 @@
   opacity: 0;
 }
 .bac__body {
-  fill: #ff5c86;
+  fill: #e8c9ee;
 }
 .bac__pili line {
-  stroke: #ff5c86;
+  stroke: #e8c9ee;
   stroke-width: 1.6;
   stroke-linecap: round;
 }
@@ -752,7 +760,7 @@
   border-radius: 50%;
 }
 .hiw__key--bac {
-  background: #ff5c86;
+  background: #e8c9ee;
 }
 .hiw__key--pac {
   background: var(--butter);
@@ -1074,7 +1082,7 @@
   font-size: clamp(18rem, 48vw, 46rem);
   line-height: 0.8;
   letter-spacing: -0.08em;
-  color: rgba(163, 33, 63, 0.55);
+  color: rgba(63, 31, 62, 0.45);
   pointer-events: none;
   user-select: none;
 }

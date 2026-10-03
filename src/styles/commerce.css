@@ -992,10 +992,10 @@
   height: 32px;
 }
 .rating-input button.is-on {
-  color: #d9960a;
+  color: #5a2e58;
 }
 .rating-input button.is-on svg {
-  fill: #f4b928;
+  fill: #5a2e58;
 }
 
 /* ------------------------------------------------------------- Cart parts */

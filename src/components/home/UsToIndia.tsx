@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { DOCTOR, BRAND } from '../../content/brand';
+import { MAP } from '../../content/worldMap';
 import { gsap, SplitText, useGSAP, MQ } from '../../lib/gsap';
 import { useReveals } from '../../lib/useReveals';
 import { ArrowLink, Img } from '../ui/primitives';
@@ -17,15 +18,25 @@ export default function UsToIndia() {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        // Route line draws from the US to India as you scroll.
+        // Route draws between the two countries while a marker travels along it.
         const path = ref.current!.querySelector<SVGPathElement>('.usroute__path')!;
+        const marker = ref.current!.querySelector<SVGGElement>('.usroute__marker')!;
         const len = path.getTotalLength();
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: '.usroute', start: 'top 85%', end: 'bottom 50%', scrub: 0.8 },
-        });
-        tl.fromTo(path, { strokeDashoffset: len, strokeDasharray: `${len} ${len}` }, { strokeDashoffset: 0, ease: 'none' })
-          .fromTo('.usroute__dot--in', { scale: 0, transformOrigin: 'center' }, { scale: 1, ease: 'back.out(3)', duration: 0.15 }, 0.85)
-          .fromTo('.usroute__label--in', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.15 }, 0.88);
+        gsap.set(path, { strokeDasharray: `${len} ${len}`, strokeDashoffset: len });
+        gsap.set(marker, { opacity: 0 });
+        const move = (p: number) => {
+          const pt = path.getPointAtLength(len * p);
+          marker.setAttribute('transform', `translate(${pt.x} ${pt.y})`);
+        };
+        const prog = { p: 0 };
+        const tl = gsap.timeline({ scrollTrigger: { trigger: '.usroute', start: 'top 85%', end: 'bottom 45%', scrub: 0.8 } });
+        tl.fromTo('.usroute__country--us', { opacity: 0.35 }, { opacity: 1, duration: 0.1 }, 0)
+          .to(marker, { opacity: 1, duration: 0.05 }, 0.02)
+          .to(path, { strokeDashoffset: 0, ease: 'none', duration: 0.8 }, 0.05)
+          .to(prog, { p: 1, ease: 'none', duration: 0.8, onUpdate: () => move(prog.p) }, 0.05)
+          .fromTo('.usroute__country--in', { opacity: 0.35 }, { opacity: 1, duration: 0.1 }, 0.85)
+          .fromTo('.usroute__label--in', { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.1 }, 0.88);
+        move(0);
 
         // Quote words brighten with scroll.
         const split = SplitText.create('.doctor__quote', { type: 'words' });
@@ -57,23 +68,26 @@ export default function UsToIndia() {
               Developed by Pharmatoka and trusted in the United States for more than two decades, ellura® now arrives in India — the same research-led approach to
               urinary tract health, in one capsule a day.
             </p>
-            <div className="usroute" data-fade aria-hidden="true">
-              <svg viewBox="0 0 520 200" className="usroute__svg">
-                <path className="usroute__grid" d="M0 50H520M0 100H520M0 150H520" />
-                <path className="usroute__path" d="M60 150 C 150 10, 360 0, 460 100" />
-                <circle className="usroute__dot" cx="60" cy="150" r="8" />
-                <circle className="usroute__dot usroute__dot--in" cx="460" cy="100" r="10" />
+            <div className="usroute" data-fade role="img" aria-label="World map showing the route from the United States to India">
+              <svg viewBox={`0 0 ${MAP.width} ${MAP.height}`} className="usroute__svg" aria-hidden="true">
+                <path className="usroute__land" d={MAP.land} />
+                <path className="usroute__country usroute__country--us" d={MAP.usa} />
+                <path className="usroute__country usroute__country--in" d={MAP.india} />
+                <path className="usroute__base" d={MAP.route} />
+                <path className="usroute__path" d={MAP.route} />
+                <circle className="usroute__dot" cx={MAP.from[0]} cy={MAP.from[1]} r="6" />
+                <circle className="usroute__dot usroute__dot--in" cx={MAP.to[0]} cy={MAP.to[1]} r="6" />
+                <g className="usroute__marker">
+                  <circle r="11" className="usroute__halo" />
+                  <circle r="5" />
+                </g>
+                <text className="usroute__pin" x={MAP.from[0] - 92} y={MAP.from[1] + 48} textAnchor="end">
+                  USA
+                </text>
+                <text className="usroute__pin usroute__label--in" x={MAP.to[0] + 30} y={MAP.to[1] + 62} textAnchor="start">
+                  India
+                </text>
               </svg>
-              <p className="usroute__label usroute__label--us">
-                USA
-                <br />
-                <span>Pharmatoka Inc. · Atlanta, GA</span>
-              </p>
-              <p className="usroute__label usroute__label--in">
-                India
-                <br />
-                <span>2026</span>
-              </p>
             </div>
           </div>
 

@@ -696,8 +696,8 @@ input[type='radio'] {
   padding: 1px 8px;
   border-radius: 6px;
   background: var(--butter-200);
-  border: 1.5px dashed #b8921f;
-  color: #5c4505;
+  border: 1.5px dashed #5a2e58;
+  color: #3f1f3e;
   font-size: 0.86em;
   font-weight: 700;
 }
@@ -744,11 +744,11 @@ input[type='radio'] {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  color: #e8a712;
+  color: #5a2e58;
 }
 .stars__fill svg {
-  fill: #f4b928;
-  stroke: #d9960a;
+  fill: #5a2e58;
+  stroke: #5a2e58;
 }
 
 /* ------------------------------------------------------------- Accordion */

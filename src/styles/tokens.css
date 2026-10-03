@@ -26,20 +26,20 @@
   --lilac-100: #f4e8f6;
 
   /* Cranberry family — the playful accents */
-  --berry: #d12f5e;
-  --berry-deep: #a3213f;
-  --blush: #fbdde1;
-  --blush-200: #fdeceb;
+  --berry: #7a3d78;
+  --berry-deep: #3f1f3e;
+  --blush: #f4e8f6;
+  --blush-200: #f9f1fa;
 
   /* Supporting pastels */
-  --butter: #f7df86;
-  --butter-200: #fcf0c2;
-  --sage: #d3e5c8;
-  --leaf: #2f6b4f;
-  --peri: #b8c1f4;
+  --butter: #d0a6d8;
+  --butter-200: #ead3ee;
+  --sage: #e3cbe8;
+  --leaf: #5a2e58;
+  --peri: #deC0e4;
 
   /* Neutrals */
-  --paper: #fffaf7;
+  --paper: #fdf9fd;
   --cream: #faf7f2;
   --ink: #26141f;
   --ink-2: #55414e;
@@ -53,7 +53,7 @@
   --line: rgba(90, 46, 88, 0.16);
   --line-strong: rgba(90, 46, 88, 0.42);
   --focus: #7b3cc8;
-  --success: #2f6b4f;
+  --success: #5a2e58;
   --danger: #b0283c;
 
   /* Type */
